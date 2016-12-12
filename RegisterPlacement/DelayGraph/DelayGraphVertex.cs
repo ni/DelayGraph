@@ -50,7 +50,8 @@ namespace RegisterPlacement.DelayGraph
         public long RegisterCostIfRegistered { get; set; }
 
         /// <summary>
-        /// Is this a Fixed Register Vertex.
+        /// Is this a vertex that is registered as part of the initial delay graph because it is an internal register on a component. 
+        /// Do not use this property to mark which nodes are registered as part of the <see cref="DelayGraphSolution"/>
         /// </summary>
         [GraphmlAttribute("boolean")]
         public bool IsRegistered { get; set; }
@@ -94,6 +95,12 @@ namespace RegisterPlacement.DelayGraph
         {
             // currently this is true, but this theoretically could change...
             return IsRegistered;
+        }
+
+        /// <inheritdot />
+        public override string ToString()
+        {
+            return nameof(VertexId) + ":" + VertexId;
         }
 
         #endregion

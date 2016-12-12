@@ -12,7 +12,7 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>DataSets.zip Scorecards</StartArguments>
+    <StartArguments>DataSets Scorecards</StartArguments>
     <StartWorkingDirectory>../../..</StartWorkingDirectory>
     <StartAction>Project</StartAction>
   </PropertyGroup>

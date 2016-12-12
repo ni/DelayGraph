@@ -9,16 +9,14 @@ namespace RegisterPlacement.LatencyAssignment
         internal LatencyAssignmentAsap()
         {
             Graph = null;
-            TargetPeriod = 0;
             DelayMap = new Dictionary<DelayGraphVertex, int>();
             RegisteredTerminals = new HashSet<DelayGraphVertex>();
         }
 
         private DelayGraph.DelayGraph Graph { get; set; }
-        private int TargetPeriod { get; set; }
 
-        private Dictionary<DelayGraphVertex, int> DelayMap { get; set; }
-        private HashSet<DelayGraphVertex> RegisteredTerminals { get; set; }
+        private Dictionary<DelayGraphVertex, int> DelayMap { get; }
+        private HashSet<DelayGraphVertex> RegisteredTerminals { get; }
 
         public HashSet<DelayGraphVertex> Execute(
             DelayGraph.DelayGraph delayGraph,

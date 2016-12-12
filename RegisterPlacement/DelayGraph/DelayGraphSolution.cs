@@ -29,12 +29,12 @@ namespace RegisterPlacement.DelayGraph
         }
 
         /// <summary>
-        /// a constructor for DG solution
+        /// Constructor for <see cref="DelayGraphSolution"/>.
         /// </summary>
         /// <param name="solutionName">The name of this solution</param>
-        /// <param name="graph">a delay graph</param>
-        /// <param name="registeredTerminals">vertices which are registered</param>
-        /// <param name="targetClockPeriod">target clock period in PS</param>
+        /// <param name="graph">The <see cref="DelayGraph"/> that is being solved by the terminals marked as registered in <paramref name="registeredTerminals"/>.</param>
+        /// <param name="registeredTerminals">A set of vertices that are to be marked as registered in this solution. These registers </param>
+        /// <param name="targetClockPeriod">The target clock period in PS for this soluton.</param>
         internal DelayGraphSolution(
             string solutionName,
             DelayGraph graph,
@@ -44,12 +44,8 @@ namespace RegisterPlacement.DelayGraph
             Graph = graph;
             RegisteredTerminals = registeredTerminals;
 
-            int errors = FixSolutionForSiblingVertices();
-            if (errors > 0)
-            {
-                Console.WriteLine("Warning: There are " + errors + " errors in inconsistent input assignments in " + solutionName);
-            }
-
+            FixSolutionForSiblingVertices();
+            
             bool foundCycle;
             int clockPeriod = EstimatePeriod(out foundCycle);
             if (foundCycle)
@@ -335,7 +331,8 @@ namespace RegisterPlacement.DelayGraph
         }
 
         /// <summary>
-        /// fix sibling to be registered if any is registered
+        /// Fix up sibling nodes that came from the same original source node before extraction. 
+        /// If any sibling is registered, all must be registered.
         /// </summary>
         /// <returns>a count of number of nodes that changed</returns>
         private int FixSolutionForSiblingVertices()
